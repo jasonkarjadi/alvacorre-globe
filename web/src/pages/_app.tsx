@@ -1,7 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { AppProps } from "next/app";
 import { useEffect } from "react";
 
-const MyApp = ({ Component, pageProps }: any) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     localStorage.removeItem("chakra-ui-color-mode");
   }, []);
