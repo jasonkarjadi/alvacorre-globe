@@ -1,8 +1,9 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext } from "react";
+import { LocaleContext } from "../LocaleContext";
 
 const Index = () => {
-  const [locale, setLocale] = useState("en");
+  const [locale, setLocale] = useContext(LocaleContext);
 
   return (
     <Box
