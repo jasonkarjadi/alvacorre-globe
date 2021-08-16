@@ -1,7 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import { useEffect, useState } from "react";
+import { createClient, Provider } from "urql";
 import { LocaleContext } from "../LocaleContext";
+
+const client = createClient({ url: "http://localhost:4000/graphql" });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -11,11 +14,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [locale, setLocale] = useState("en");
 
   return (
-    <LocaleContext.Provider value={[locale, setLocale]}>
-      <ChakraProvider resetCSS>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </LocaleContext.Provider>
+    <Provider value={client}>
+      <LocaleContext.Provider value={[locale, setLocale]}>
+        <ChakraProvider resetCSS>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </LocaleContext.Provider>
+    </Provider>
   );
 };
 

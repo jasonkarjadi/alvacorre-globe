@@ -6,18 +6,20 @@ import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import { Locale } from "./entities/Locale";
 import { HelloResolver } from "./resolvers/hello";
+import { LocaleResolver } from "./resolvers/locale";
 
 const main = async () => {
   const conn = await createConnection({
     type: "postgres",
     url: process.env.DATABASE_URL,
     logging: true,
-    synchronize: true,
+    // synchronize: true,
     migrations: [path.join(__dirname, "./migrations/*")],
     entities: [Locale],
   });
+  // await conn.runMigrations();
 
-  console.log("conn.options: ", conn.options);
+  console.log("conn.options: ", conn.options.type);
 
   const app = express();
 
@@ -25,7 +27,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver],
+      resolvers: [HelloResolver, LocaleResolver],
       validate: false,
     }),
   });

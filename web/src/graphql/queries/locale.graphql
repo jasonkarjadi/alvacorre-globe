@@ -1,0 +1,5 @@
+query Locale($iso: String!) {
+  locale(iso: $iso) {
+    iso
+  }
+}
