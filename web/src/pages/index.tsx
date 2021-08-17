@@ -5,10 +5,10 @@ import { LocaleContext } from "../LocaleContext";
 
 const Index = () => {
   const [locale, setLocale] = useContext(LocaleContext);
-  const [{ data, fetching, error }] = useLocalesQuery();
+  const [{ data, fetching }] = useLocalesQuery();
 
   if (!fetching && !data) {
-    return error?.response;
+    return "your query faild for some reason";
   }
 
   return (
