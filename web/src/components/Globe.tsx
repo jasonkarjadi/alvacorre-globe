@@ -22,7 +22,7 @@ import {
 } from "./shaders";
 
 const Globe: React.FC = () => {
-  const onCanvasLoaded = (canvas: HTMLCanvasElement) => {
+  const onCanvasLoaded = (canvas: HTMLCanvasElement | null) => {
     if (!canvas) {
       return;
     }
@@ -112,7 +112,10 @@ const Globe: React.FC = () => {
   return (
     <Box
       as="canvas"
-      ref={onCanvasLoaded as string & ((instance: HTMLCanvasElement) => void)}
+      ref={
+        onCanvasLoaded as ((instance: HTMLDivElement | null) => void) &
+          ((instance: HTMLCanvasElement | null) => void)
+      }
       borderRadius="full"
     />
   );
