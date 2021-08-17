@@ -3,12 +3,12 @@ import { useContext } from "react";
 import { useLocalesQuery } from "../generated/graphql";
 import { LocaleContext } from "../LocaleContext";
 
-const Index = () => {
+const Index: React.FC = () => {
   const [locale, setLocale] = useContext(LocaleContext);
   const [{ data, fetching }] = useLocalesQuery();
 
   if (!fetching && !data) {
-    return "your query faild for some reason";
+    return <p>your query faild for some reason</p>;
   }
 
   return (
